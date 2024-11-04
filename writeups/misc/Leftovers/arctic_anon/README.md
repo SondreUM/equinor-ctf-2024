@@ -56,7 +56,7 @@ $ echo $(($(date -d "2024-09-22" +%s)/1000000))
 1726
 ```
 
-We now know the values of both `$PWD` and `$ITER`.
+We now know the values of both `$PWD` and `$ITER` that are needed for decryption.
 We check the openssl tool to check for any decryption options.
 
 ```bash
@@ -69,8 +69,14 @@ General options:
  -d                  Decrypt
 ```
 
-We now know the values of both `$PWD` and `$ITER`.
-And construct the following command to decrypt the file.
+Save the ciphertext from the openssl output given in the
+`terminal.log.txt` file to a file named `cipher.txt`.
+
+```bash
+echo "U2FsdGVkX1+/39qrCQ9rlxMW2E30ylTUXYS+GTAVDMUK0oXJvkUDBCRbhClK2GKYc50OQZ7zgLPBhkMW8CM5VVnZBrxfyH5CAG8nj5BPDCg=" > cipher.txt
+```
+
+Then construct the following command to decrypt the file.
 
 ```bash
 $ openssl enc -aes-256-cbc -pbkdf2 -iter 1726 -in cipher.txt -k ubuntu-s-1vcpu-512mb-10gb-ams3-01 -a -d
